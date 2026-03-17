@@ -8,7 +8,7 @@ import os
 
 # Page Config
 st.set_page_config(
-    page_title="PriceWise AI | Precision Real Estate Intelligence",
+    page_title="PropPredict | Precision Real Estate Intelligence",
     page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -178,7 +178,7 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.markdown('<div class="sidebar-logo">PriceWise</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-logo">PropPredict</div>', unsafe_allow_html=True)
         st.markdown('<div class="sidebar-subtitle">Precision Intelligence</div>', unsafe_allow_html=True)
         
         page = st.radio("Nav", ["🏠 Overview", "🎯 Make a Prediction", "📈 Model Evaluation", "📖 Architecture"], index=0)
@@ -375,7 +375,7 @@ def main():
         """)
 
     # Footer
-    st.markdown('<div style="text-align: center; color: #475569; padding: 2rem; font-size: 0.8rem;">PriceWise AI © 2026 • Intelligent Property Prediction System • Precision Intelligence v1.0.2</div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: center; color: #475569; padding: 2rem; font-size: 0.8rem;">PropPredict © 2026 • Intelligent Property Prediction System • Precision Intelligence v1.0.2</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

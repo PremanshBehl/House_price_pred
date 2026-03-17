@@ -1,4 +1,5 @@
-# Intelligent Property Price Prediction System
+# PropPredict AI 🏠
+System
 
 ## Milestone 1: ML-Based Property Price Prediction
 
