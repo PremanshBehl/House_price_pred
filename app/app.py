@@ -271,7 +271,7 @@ def main():
             if uploaded_file is not None:
                 data = pd.read_csv(uploaded_file)
                 st.markdown("#### Data Preview")
-                st.dataframe(data.head(), use_container_width=True)
+                st.dataframe(data.head(), width='stretch')
                 
                 # Check for required columns
                 missing_cols = [c for c in features if c not in data.columns]
@@ -295,7 +295,7 @@ def main():
                         data['PredictedPrice'] = predictions
                         
                         st.success(f"Successfully processed {len(data)} properties.")
-                        st.dataframe(data, use_container_width=True)
+                        st.dataframe(data, width='stretch')
                         
                         # Download button
                         csv = data.to_csv(index=False).encode('utf-8')
@@ -316,9 +316,20 @@ def main():
             if model:
                 importances = model.feature_importances_
                 feat_imp_df = pd.DataFrame({'Feature': features, 'Weight': importances}).sort_values('Weight', ascending=True)
-                fig = px.bar(feat_imp_df, x='Weight', y='Feature', orientation='h', color_discrete_sequence=['#10B981'])
-                fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color='white', height=500)
-                st.plotly_chart(fig, use_container_width=True)
+                
+                fig = px.bar(feat_imp_df, x='Weight', y='Feature', orientation='h', template='plotly_dark')
+                fig.update_traces(marker_color='#FF4B4B', hovertemplate='%{y}<br>Weight: %{x:.4f}<extra></extra>')
+                fig.update_layout(
+                    paper_bgcolor='#111827',
+                    plot_bgcolor='#111827',
+                    margin=dict(l=20, r=20, t=30, b=30),
+                    height=500,
+                    xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
+                    yaxis=dict(showgrid=False)
+                )
+                st.plotly_chart(fig, width='stretch')
+            else:
+                st.warning("Model not loaded - weights unavailable.")
             st.markdown('</div>', unsafe_allow_html=True)
             
         with m_col2:
