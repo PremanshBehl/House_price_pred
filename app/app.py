@@ -155,14 +155,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Helper function to load models
+# Helper function to load models with robust pathing
 @st.cache_resource
 def load_assets():
-    if not os.path.exists('models/house_price_model.joblib'):
+    # Get the directory of the current script (app/app.py)
+    # Then go up one level to the root project directory
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_path = os.path.join(base_dir, 'models', 'house_price_model.joblib')
+    scaler_path = os.path.join(base_dir, 'models', 'scaler.joblib')
+    features_path = os.path.join(base_dir, 'models', 'features.joblib')
+    
+    if not os.path.exists(model_path):
         return None, None, None
-    model = joblib.load('models/house_price_model.joblib')
-    scaler = joblib.load('models/scaler.joblib')
-    features = joblib.load('models/features.joblib')
+    
+    model = joblib.load(model_path)
+    scaler = joblib.load(scaler_path)
+    features = joblib.load(features_path)
     return model, scaler, features
 
 def main():
